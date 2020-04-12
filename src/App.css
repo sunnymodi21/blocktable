@@ -1,0 +1,19 @@
+body {
+  background-color: rgb(224, 224, 224)  !important;
+}
+
+.btn-primary {
+  color: #FFFFFF;
+  background-color: #343a40 !important;
+  border: 0 !important;
+}
+
+.btn-primary:hover {
+  opacity: 0.5;
+  border: 0;
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+  opacity: 0.5;
+  background-color: rgb(135, 172, 196);
+}
