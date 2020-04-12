@@ -40,7 +40,7 @@ class MyTable extends Component {
   }
   
   getTableList(){
-    this.userSession.getFile('tables/index.json', {username:"sunnymodi.id.blockstack"})
+    this.userSession.getFile('tables/index.json')
     .then((data)=> {
       if(data != null){
         let tables = JSON.parse(data)
@@ -67,11 +67,11 @@ class MyTable extends Component {
   }
 
   uploadFile(fileData, fileDetails, tables, isEdit){
-    let options = { encrypt: false}
+    // let options = { encrypt: false}
+    let options = {encrypt: getPublicKeyFromPrivate(fileDetails.aesKey)}
     if(!isEdit){
       this.userSession.putFile('tables/index.json', JSON.stringify(tables), options)
     }
-    // let options = {encrypt: getPublicKeyFromPrivate(fileDetails.aesKey)}
     this.userSession.putFile(`tables/${fileDetails.fileId}`, JSON.stringify(fileData), options)
     .then(()=>{
       this.setState({
@@ -86,11 +86,11 @@ class MyTable extends Component {
       loader: true
     })
     console.log(currentFile.fileId)
-    // this.userSession.getFile('tables/'+currentFile.fileId, { decrypt: false })
-    this.userSession.getFile('tables/1586678990341VO7ei'+currentFile.fileId, { decrypt: false,username:"sunnymodi.id.blockstack" })
+    this.userSession.getFile('tables/'+currentFile.fileId, { decrypt: false })
+    // this.userSession.getFile('tables/1586678990341VO7ei'+currentFile.fileId, { decrypt: false,username:"sunnymodi.id.blockstack" })
     .then((data)=> {
       if(data != null){
-        // data = decryptContent(data, { privateKey: currentFile.aesKey })   
+        data = decryptContent(data, { privateKey: currentFile.aesKey })   
         this.file = currentFile
         const tables = JSON.parse(data)
         this.setState({
