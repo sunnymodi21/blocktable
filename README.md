@@ -1,1 +1,1 @@
-A decentralized privacy-focused alternative for Airtable
+A decentralized privacy-focused alternative for Airtable.
